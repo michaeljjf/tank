@@ -43,19 +43,32 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         System.out.println("paint");
-        g.setColor(Color.BLUE);
+        g.setColor(Color.RED);
         g.fillRect(x, y, 50, 50);
-        x += 10;
-        y += 10;
     }
 
     class MyKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
             System.out.println("keyPressed");
-//            x += 10;
-//            y += 10;
-//            repaint();
+            int key = e.getKeyCode();
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+                    x -= 10;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    x += 10;
+                    break;
+                case KeyEvent.VK_UP:
+                    y -= 10;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    y += 10;
+                    break;
+                default:
+                    break;
+            }
+            repaint();
         }
 
         @Override
