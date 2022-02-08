@@ -1,4 +1,5 @@
-package com.jiangjf;
+package com.jiangjf.tank;
+
 
 /**
  * tank war

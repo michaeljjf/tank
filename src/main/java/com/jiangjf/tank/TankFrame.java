@@ -1,4 +1,4 @@
-package com.jiangjf;
+package com.jiangjf.tank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -7,6 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * tank war
@@ -18,7 +19,8 @@ public class TankFrame extends Frame {
 
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    List<Bullet> bullets = new ArrayList<Bullet>();
+    List<Tank> otherTanks = new ArrayList<>();
+    List<Bullet> bullets = new ArrayList<>();
 
     public TankFrame() {
         // 设置窗口大小
@@ -40,7 +42,26 @@ public class TankFrame extends Frame {
         });
         // 键盘监听
         this.addKeyListener(new MyKeyListener());
+
+        initOtherTanks();
     }
+
+    /**
+     * 初始化敌方坦克
+     */
+    private void initOtherTanks() {
+        Random random = new Random();
+        int max = random.nextInt(10);
+        for (int i = 0; i < max; i++) {
+            int x = random.nextInt(GAME_WIDTH);
+            int y = random.nextInt(GAME_HEIGHT);
+            Tank tank = new Tank(x, y, Dir.RIGHT, this);
+            tank.setColor(Color.MAGENTA);
+            tank.setMoving(true);
+            otherTanks.add(tank);
+        }
+    }
+
 
     @Override
     public void paint(Graphics g) {
@@ -51,8 +72,15 @@ public class TankFrame extends Frame {
         g.drawString("子弹数量：" + bullets.size(), 15, 50);
         g.setColor(color);
 
+        // 画出我方坦克
         myTank.paint(g);
 
+        // 画出敌方坦克
+        for (int i = 0; i < otherTanks.size(); i++) {
+            otherTanks.get(i).paint(g);
+        }
+
+        // 画出子弹
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
         }

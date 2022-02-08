@@ -1,4 +1,4 @@
-package com.jiangjf;
+package com.jiangjf.tank;
 
 import java.awt.*;
 

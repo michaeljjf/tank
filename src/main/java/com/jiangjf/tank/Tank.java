@@ -1,4 +1,4 @@
-package com.jiangjf;
+package com.jiangjf.tank;
 
 import java.awt.*;
 
@@ -15,6 +15,11 @@ public class Tank {
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
     private TankFrame tankFrame = null;
+    private Color color = null;
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 
     public boolean isMoving() {
         return moving;
@@ -43,7 +48,12 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        Color originColor = g.getColor();
+        if (this.color != null) {
+            g.setColor(this.color);
+        }
         g.fillRect(x, y, TANK_WIDTH, TANK_HEIGHT);
+        g.setColor(originColor);
         move();
     }
 
