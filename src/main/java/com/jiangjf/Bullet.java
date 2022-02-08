@@ -3,51 +3,35 @@ package com.jiangjf;
 import java.awt.*;
 
 /**
- * 坦克
+ * 子弹
  *
  * @author jiangjf
  * @date 2022/2/8
  */
-public class Tank {
+public class Bullet {
+    private static final int SPEED = 10;
+    private static final int WIDTH = 10, HEIGHT = 10;
     private int x, y;
-    static final int SPEED = 5;
-    private Dir dir = Dir.DOWN;
-    private boolean moving = false;
+    private Dir dir;
 
-    public boolean isMoving() {
-        return moving;
+    public Bullet() {
     }
 
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
-
-    public Dir getDir() {
-        return dir;
-    }
-
-    public void setDir(Dir dir) {
-        this.dir = dir;
-    }
-
-    public Tank() {
-    }
-
-    public Tank(int x, int y, Dir dir) {
+    public Bullet(int x, int y, Dir dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
     }
 
     public void paint(Graphics g) {
-        g.fillRect(x, y, 50, 50);
+        Color color = g.getColor();
+        g.setColor(Color.RED);
+        g.fillOval(x, y, WIDTH, HEIGHT);
+        g.setColor(color);
         move();
     }
 
     private void move() {
-        if (!moving) {
-            return;
-        }
         switch (dir) {
             case LEFT:
                 x -= SPEED;
