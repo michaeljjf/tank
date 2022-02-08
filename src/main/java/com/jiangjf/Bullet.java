@@ -16,10 +16,6 @@ public class Bullet {
     private boolean live = true;
     private TankFrame tankFrame = null;
 
-    public boolean isLive() {
-        return live;
-    }
-
     public Bullet() {
     }
 
