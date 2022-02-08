@@ -1,6 +1,7 @@
 package com.jiangjf.tank;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * 坦克
@@ -48,12 +49,29 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        Color originColor = g.getColor();
-        if (this.color != null) {
-            g.setColor(this.color);
+//        Color originColor = g.getColor();
+//        if (this.color != null) {
+//            g.setColor(this.color);
+//        }
+//        g.fillRect(x, y, TANK_WIDTH, TANK_HEIGHT);
+        BufferedImage bufferedImage = null;
+        switch (dir) {
+            case LEFT:
+                bufferedImage = ResourceMgr.tankLeft;
+                break;
+            case RIGHT:
+                bufferedImage = ResourceMgr.tankRight;
+                break;
+            case UP:
+                bufferedImage = ResourceMgr.tankUp;
+                break;
+            default:
+            case DOWN:
+                bufferedImage = ResourceMgr.tankDown;
+                break;
         }
-        g.fillRect(x, y, TANK_WIDTH, TANK_HEIGHT);
-        g.setColor(originColor);
+        g.drawImage(bufferedImage, x, y, null);
+//        g.setColor(originColor);
         move();
     }
 
@@ -86,6 +104,26 @@ public class Tank {
      * 开火
      */
     public void fire() {
-        this.tankFrame.bullets.add(new Bullet(this.x + (TANK_WIDTH / 2), this.y + (TANK_HEIGHT / 2), this.dir, this.tankFrame));
+        int x = this.x;
+        int y = this.y;
+        switch (dir) {
+            case LEFT:
+                y = y + TANK_HEIGHT / 2;
+                break;
+            case RIGHT:
+                x = x + TANK_WIDTH;
+                y = y + TANK_HEIGHT / 2;
+                break;
+            case UP:
+                x = x + TANK_WIDTH / 2;
+                break;
+            case DOWN:
+                x = x + TANK_WIDTH / 2;
+                y = y + TANK_HEIGHT;
+                break;
+            default:
+                break;
+        }
+        this.tankFrame.bullets.add(new Bullet(x, y, this.dir, this.tankFrame));
     }
 }

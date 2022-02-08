@@ -43,7 +43,7 @@ public class TankFrame extends Frame {
         // 键盘监听
         this.addKeyListener(new MyKeyListener());
 
-        initOtherTanks();
+//        initOtherTanks();
     }
 
     /**
@@ -65,8 +65,6 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        System.out.println("paint");
-
         Color color = g.getColor();
         g.setColor(Color.BLACK);
         g.drawString("子弹数量：" + bullets.size(), 15, 50);
@@ -119,7 +117,6 @@ public class TankFrame extends Frame {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println("keyPressed");
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
                     boolLeft = true;
@@ -141,7 +138,6 @@ public class TankFrame extends Frame {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("keyReleased");
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
                     boolLeft = false;
