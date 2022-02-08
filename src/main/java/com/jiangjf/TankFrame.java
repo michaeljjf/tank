@@ -102,18 +102,18 @@ public class TankFrame extends Frame {
                 myTank.setMoving(false);
             } else {
                 myTank.setMoving(true);
-            }
-            if (boolLeft) {
-                myTank.setDir(Dir.LEFT);
-            }
-            if (boolRight) {
-                myTank.setDir(Dir.RIGHT);
-            }
-            if (boolUp) {
-                myTank.setDir(Dir.UP);
-            }
-            if (boolDown) {
-                myTank.setDir(Dir.DOWN);
+                if (boolLeft) {
+                    myTank.setDir(Dir.LEFT);
+                }
+                if (boolRight) {
+                    myTank.setDir(Dir.RIGHT);
+                }
+                if (boolUp) {
+                    myTank.setDir(Dir.UP);
+                }
+                if (boolDown) {
+                    myTank.setDir(Dir.DOWN);
+                }
             }
         }
     }
