@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-    private static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
     List<Bullet> bullets = new ArrayList<Bullet>();
 
@@ -45,10 +45,22 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         System.out.println("paint");
+
+        Color color = g.getColor();
+        g.setColor(Color.BLACK);
+        g.drawString("子弹数量：" + bullets.size(), 15, 50);
+        g.setColor(color);
+
         myTank.paint(g);
-        for (Bullet bullet : bullets) {
-            bullet.paint(g);
+
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).paint(g);
         }
+
+        // 下面这种通过迭代器方式在bullets.remove()的时候会越界报错
+//        for (Bullet bullet : bullets) {
+//            bullet.paint(g);
+//        }
     }
 
     /**

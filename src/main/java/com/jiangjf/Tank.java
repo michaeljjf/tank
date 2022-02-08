@@ -46,6 +46,9 @@ public class Tank {
         move();
     }
 
+    /**
+     * 移动位置
+     */
     private void move() {
         if (!moving) {
             return;
@@ -68,7 +71,10 @@ public class Tank {
         }
     }
 
+    /**
+     * 开火
+     */
     public void fire() {
-        this.tankFrame.bullets.add(new Bullet(this.x, this.y, this.dir));
+        this.tankFrame.bullets.add(new Bullet(this.x, this.y, this.dir, this.tankFrame));
     }
 }
