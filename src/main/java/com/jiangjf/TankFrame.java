@@ -14,9 +14,7 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
-    int x = 200, y = 200;
-    final int SPEED = 10;
-    Dir dir = Dir.DOWN;
+    Tank myTank = new Tank(200, 200, Dir.DOWN);
 
     public TankFrame() {
         // 设置窗口大小
@@ -45,24 +43,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         System.out.println("paint");
-        g.setColor(Color.RED);
-        g.fillRect(x, y, 50, 50);
-        switch (dir) {
-            case LEFT:
-                x -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            case UP:
-                y -= SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-            default:
-                break;
-        }
+        myTank.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -117,17 +98,22 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
+            if (!boolLeft && !boolRight && !boolUp && !boolDown) {
+                myTank.setMoving(false);
+            } else {
+                myTank.setMoving(true);
+            }
             if (boolLeft) {
-                dir = Dir.LEFT;
+                myTank.setDir(Dir.LEFT);
             }
             if (boolRight) {
-                dir = Dir.RIGHT;
+                myTank.setDir(Dir.RIGHT);
             }
             if (boolUp) {
-                dir = Dir.UP;
+                myTank.setDir(Dir.UP);
             }
             if (boolDown) {
-                dir = Dir.DOWN;
+                myTank.setDir(Dir.DOWN);
             }
         }
     }
