@@ -31,10 +31,11 @@ public class Bullet {
         if (!this.live) {
             this.tankFrame.bullets.remove(this);
         }
-        Color color = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, WIDTH, HEIGHT);
-        g.setColor(color);
+//        Color color = g.getColor();
+//        g.setColor(Color.RED);
+//        g.fillOval(x, y, WIDTH, HEIGHT);
+//        g.setColor(color);
+        g.drawImage(ResourceMgr.imageBullet, x, y, null);
         move();
     }
 

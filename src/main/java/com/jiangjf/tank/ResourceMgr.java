@@ -9,7 +9,7 @@ import java.io.IOException;
  * @date 2022/2/8
  */
 public class ResourceMgr {
-    public static BufferedImage tankLeft, tankRight, tankUp, tankDown;
+    public static BufferedImage tankLeft, tankRight, tankUp, tankDown, imageBullet;
 
     static {
         try {
@@ -18,6 +18,7 @@ public class ResourceMgr {
             tankRight = ImageIO.read(classLoader.getResourceAsStream("images/tankR.gif"));
             tankUp = ImageIO.read(classLoader.getResourceAsStream("images/tankU.gif"));
             tankDown = ImageIO.read(classLoader.getResourceAsStream("images/tankD.gif"));
+            imageBullet = ImageIO.read(classLoader.getResourceAsStream("images/1.gif"));
         } catch (IOException e) {
             e.printStackTrace();
         }
