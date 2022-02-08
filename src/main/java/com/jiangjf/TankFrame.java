@@ -48,26 +48,42 @@ public class TankFrame extends Frame {
     }
 
     class MyKeyListener extends KeyAdapter {
+
+        boolean boolLeft = false;
+        boolean boolRight = false;
+        boolean boolUp = false;
+        boolean boolDown = false;
+
         @Override
         public void keyPressed(KeyEvent e) {
             System.out.println("keyPressed");
-
-            int key = e.getKeyCode();
-            switch (key) {
+            switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
-                    x -= 10;
+                    boolLeft = true;
                     break;
                 case KeyEvent.VK_RIGHT:
-                    x += 10;
+                    boolRight = true;
                     break;
                 case KeyEvent.VK_UP:
-                    y -= 10;
+                    boolUp = true;
                     break;
                 case KeyEvent.VK_DOWN:
-                    y += 10;
+                    boolDown = true;
                     break;
                 default:
                     break;
+            }
+            if (boolLeft) {
+                x -= 10;
+            }
+            if (boolRight) {
+                x += 10;
+            }
+            if (boolUp) {
+                y -= 10;
+            }
+            if (boolDown) {
+                y += 10;
             }
             repaint();
         }
@@ -75,6 +91,22 @@ public class TankFrame extends Frame {
         @Override
         public void keyReleased(KeyEvent e) {
             System.out.println("keyReleased");
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    boolLeft = false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    boolRight = false;
+                    break;
+                case KeyEvent.VK_UP:
+                    boolUp = false;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    boolDown = false;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
