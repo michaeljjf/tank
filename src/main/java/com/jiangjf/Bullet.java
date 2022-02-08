@@ -20,8 +20,9 @@ public class Bullet {
     }
 
     public Bullet(int x, int y, Dir dir, TankFrame tankFrame) {
-        this.x = x;
-        this.y = y;
+        // 让子弹的坐标，在坦克中间
+        this.x = x - WIDTH / 2;
+        this.y = y - HEIGHT / 2;
         this.dir = dir;
         this.tankFrame = tankFrame;
     }

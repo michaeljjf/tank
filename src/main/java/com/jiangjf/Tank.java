@@ -11,6 +11,7 @@ import java.awt.*;
 public class Tank {
     private int x, y;
     static final int SPEED = 5;
+    static final int TANK_WIDTH = 50, TANK_HEIGHT = 50;
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
     private TankFrame tankFrame = null;
@@ -42,7 +43,7 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        g.fillRect(x, y, 50, 50);
+        g.fillRect(x, y, TANK_WIDTH, TANK_HEIGHT);
         move();
     }
 
@@ -75,6 +76,6 @@ public class Tank {
      * 开火
      */
     public void fire() {
-        this.tankFrame.bullets.add(new Bullet(this.x, this.y, this.dir, this.tankFrame));
+        this.tankFrame.bullets.add(new Bullet(this.x + (TANK_WIDTH / 2), this.y + (TANK_HEIGHT / 2), this.dir, this.tankFrame));
     }
 }
