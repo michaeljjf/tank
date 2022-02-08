@@ -5,6 +5,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * tank war
@@ -16,7 +18,7 @@ public class TankFrame extends Frame {
 
     private static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    Bullet bullet;
+    List<Bullet> bullets = new ArrayList<Bullet>();
 
     public TankFrame() {
         // 设置窗口大小
@@ -44,7 +46,7 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         System.out.println("paint");
         myTank.paint(g);
-        if (bullet != null) {
+        for (Bullet bullet : bullets) {
             bullet.paint(g);
         }
     }
