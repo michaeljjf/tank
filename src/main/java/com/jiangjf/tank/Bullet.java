@@ -9,9 +9,9 @@ import java.awt.*;
  * @date 2022/2/8
  */
 public class Bullet {
-    private static final int SPEED = 10;
-    private static final int WIDTH = ResourceMgr.imageBullet.getWidth();
-    private static final int HEIGHT = ResourceMgr.imageBullet.getHeight();
+    private static final int SPEED = 15;
+    private static final int WIDTH = ResourceMgr.bulletUp.getWidth();
+    private static final int HEIGHT = ResourceMgr.bulletUp.getHeight();
     private int x, y;
     private Dir dir;
     private boolean living = true;
@@ -35,11 +35,21 @@ public class Bullet {
             this.tankFrame.bullets.remove(this);
             return;
         }
-//        Color color = g.getColor();
-//        g.setColor(Color.RED);
-//        g.fillOval(x, y, WIDTH, HEIGHT);
-//        g.setColor(color);
-        g.drawImage(ResourceMgr.imageBullet, x, y, null);
+        switch (dir) {
+            case LEFT:
+                g.drawImage(ResourceMgr.bulletLeft, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.bulletRight, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.bulletUp, x, y, null);
+                break;
+            case DOWN:
+            default:
+                g.drawImage(ResourceMgr.bulletDown, x, y, null);
+                break;
+        }
         move();
     }
 
