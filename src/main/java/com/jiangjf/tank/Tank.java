@@ -1,7 +1,6 @@
 package com.jiangjf.tank;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * 坦克
@@ -12,26 +11,23 @@ import java.awt.image.BufferedImage;
 public class Tank {
     private int x, y;
     static final int SPEED = 5;
-    static final int TANK_WIDTH = 50, TANK_HEIGHT = 50;
+    static final int TANK_WIDTH = ResourceMgr.tankLeft.getWidth();
+    static final int TANK_HEIGHT = ResourceMgr.tankLeft.getHeight();
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
+    private boolean living = true;
     private TankFrame tankFrame = null;
-    private Color color = null;
 
-    public void setColor(Color color) {
-        this.color = color;
+    public int getX() {
+        return x;
     }
 
-    public boolean isMoving() {
-        return moving;
+    public int getY() {
+        return y;
     }
 
     public void setMoving(boolean moving) {
         this.moving = moving;
-    }
-
-    public Dir getDir() {
-        return dir;
     }
 
     public void setDir(Dir dir) {
@@ -49,29 +45,24 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-//        Color originColor = g.getColor();
-//        if (this.color != null) {
-//            g.setColor(this.color);
-//        }
-//        g.fillRect(x, y, TANK_WIDTH, TANK_HEIGHT);
-        BufferedImage bufferedImage = null;
+        if (!living) {
+            this.tankFrame.tanks.remove(this);
+        }
         switch (dir) {
             case LEFT:
-                bufferedImage = ResourceMgr.tankLeft;
+                g.drawImage(ResourceMgr.tankLeft, x, y, null);
                 break;
             case RIGHT:
-                bufferedImage = ResourceMgr.tankRight;
+                g.drawImage(ResourceMgr.tankRight, x, y, null);
                 break;
             case UP:
-                bufferedImage = ResourceMgr.tankUp;
+                g.drawImage(ResourceMgr.tankUp, x, y, null);
                 break;
             default:
             case DOWN:
-                bufferedImage = ResourceMgr.tankDown;
+                g.drawImage(ResourceMgr.tankDown, x, y, null);
                 break;
         }
-        g.drawImage(bufferedImage, x, y, null);
-//        g.setColor(originColor);
         move();
     }
 
@@ -104,6 +95,10 @@ public class Tank {
      * 开火
      */
     public void fire() {
+        // 中心位置
+//        int x = this.x + Tank.TANK_WIDTH / 2;
+//        int y = this.y + Tank.TANK_HEIGHT / 2;
+        // 让子弹发出的位置在坦克的炮口
         int x = this.x;
         int y = this.y;
         switch (dir) {
@@ -125,5 +120,9 @@ public class Tank {
                 break;
         }
         this.tankFrame.bullets.add(new Bullet(x, y, this.dir, this.tankFrame));
+    }
+
+    public void die() {
+        this.living = false;
     }
 }

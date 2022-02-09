@@ -18,8 +18,8 @@ import java.util.Random;
 public class TankFrame extends Frame {
 
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    List<Tank> otherTanks = new ArrayList<>();
+    Tank myTank = new Tank(200, 400, Dir.UP, this);
+    List<Tank> tanks = new ArrayList<>();
     List<Bullet> bullets = new ArrayList<>();
 
     public TankFrame() {
@@ -42,45 +42,34 @@ public class TankFrame extends Frame {
         });
         // 键盘监听
         this.addKeyListener(new MyKeyListener());
-
-//        initOtherTanks();
     }
-
-    /**
-     * 初始化敌方坦克
-     */
-    private void initOtherTanks() {
-        Random random = new Random();
-        int max = random.nextInt(10);
-        for (int i = 0; i < max; i++) {
-            int x = random.nextInt(GAME_WIDTH);
-            int y = random.nextInt(GAME_HEIGHT);
-            Tank tank = new Tank(x, y, Dir.RIGHT, this);
-            tank.setColor(Color.MAGENTA);
-            tank.setMoving(true);
-            otherTanks.add(tank);
-        }
-    }
-
 
     @Override
     public void paint(Graphics g) {
         Color color = g.getColor();
         g.setColor(Color.BLACK);
         g.drawString("子弹数量：" + bullets.size(), 15, 50);
+        g.drawString("敌方坦克数量：" + tanks.size(), 95, 50);
         g.setColor(color);
 
         // 画出我方坦克
         myTank.paint(g);
 
         // 画出敌方坦克
-        for (int i = 0; i < otherTanks.size(); i++) {
-            otherTanks.get(i).paint(g);
+        for (int i = 0; i < tanks.size(); i++) {
+            tanks.get(i).paint(g);
         }
 
         // 画出子弹
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
+        }
+
+        // 子弹与敌方坦克是否碰撞
+        for (int i = 0; i < bullets.size(); i++) {
+            for (int j = 0; j < tanks.size(); j++) {
+                bullets.get(i).collideWith(tanks.get(j));
+            }
         }
 
         // 下面这种通过迭代器方式在bullets.remove()的时候会越界报错

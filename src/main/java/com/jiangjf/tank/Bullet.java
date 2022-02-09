@@ -10,10 +10,11 @@ import java.awt.*;
  */
 public class Bullet {
     private static final int SPEED = 10;
-    private static final int WIDTH = 10, HEIGHT = 10;
+    private static final int WIDTH = ResourceMgr.imageBullet.getWidth();
+    private static final int HEIGHT = ResourceMgr.imageBullet.getHeight();
     private int x, y;
     private Dir dir;
-    private boolean live = true;
+    private boolean living = true;
     private TankFrame tankFrame = null;
 
     public Bullet() {
@@ -28,7 +29,7 @@ public class Bullet {
     }
 
     public void paint(Graphics g) {
-        if (!this.live) {
+        if (!this.living) {
             this.tankFrame.bullets.remove(this);
         }
 //        Color color = g.getColor();
@@ -57,8 +58,20 @@ public class Bullet {
                 break;
         }
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
-            this.live = false;
+            this.living = false;
         }
     }
 
+    public void collideWith(Tank tank) {
+        Rectangle rectangleBullet = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        Rectangle rectangleTank = new Rectangle(tank.getX(), tank.getY(), Tank.TANK_WIDTH, Tank.TANK_HEIGHT);
+        if (rectangleBullet.intersects(rectangleTank)) {
+            this.die();
+            tank.die();
+        }
+    }
+
+    private void die() {
+        this.living = false;
+    }
 }
