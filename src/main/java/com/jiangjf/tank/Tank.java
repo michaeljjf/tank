@@ -112,8 +112,6 @@ public class Tank {
             default:
                 break;
         }
-        rectangle.x = this.x;
-        rectangle.y = this.y;
         // 敌方坦克随机发射子弹
         if (this.group.equals(Group.BAD) && RANDOM.nextInt(100) > 96) {
             this.fire();
@@ -123,6 +121,9 @@ public class Tank {
             this.randomDir();
         }
         boundsCheck();
+        // update rectangle
+        rectangle.x = this.x;
+        rectangle.y = this.y;
     }
 
     /**

@@ -75,6 +75,7 @@ public class Bullet {
             default:
                 break;
         }
+        // update rectangle
         rectangle.x = this.x;
         rectangle.y = this.y;
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
