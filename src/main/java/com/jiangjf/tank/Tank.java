@@ -104,10 +104,24 @@ public class Tank {
                 break;
         }
 
+        if (x <= 0 || y <= 0) {
+            this.dir = Dir.DOWN;
+        }
+        if (x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT) {
+            this.dir = Dir.LEFT;
+        }
         // 敌方坦克随机发射子弹
-        if (this.group.equals(Group.BAD) && RANDOM.nextInt(15) == 8) {
+        if (this.group.equals(Group.BAD) && RANDOM.nextInt(100) > 95) {
             this.fire();
         }
+        // 敌方坦克随机移动
+        if (this.group.equals(Group.BAD) && RANDOM.nextInt(80) > 77) {
+            this.randomDir();
+        }
+    }
+
+    private void randomDir() {
+        this.dir = Dir.values()[RANDOM.nextInt(4)];
     }
 
     /**
