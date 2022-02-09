@@ -7,7 +7,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * tank war
@@ -18,7 +17,7 @@ import java.util.Random;
 public class TankFrame extends Frame {
 
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
+    Tank myTank = new Tank(210, 400, Dir.UP, Group.GOOD, this);
     List<Tank> tanks = new ArrayList<>();
     List<Bullet> bullets = new ArrayList<>();
     List<Explode> explodes = new ArrayList<>();
@@ -31,7 +30,7 @@ public class TankFrame extends Frame {
         this.setLocation((dimension.width - GAME_WIDTH) / 2, (dimension.height - GAME_HEIGHT) / 2);
         // 禁用最大化
         this.setResizable(false);
-        this.setTitle("tank war");
+        this.setTitle("坦克大战");
         // 显示窗口
         this.setVisible(true);
         // 监听关闭事件
