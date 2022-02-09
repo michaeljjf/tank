@@ -129,29 +129,8 @@ public class Tank {
      */
     public void fire() {
         // 中心位置
-//        int x = this.x + Tank.TANK_WIDTH / 2;
-//        int y = this.y + Tank.TANK_HEIGHT / 2;
-        // 让子弹发出的位置在坦克的炮口
-        int x = this.x;
-        int y = this.y;
-        switch (dir) {
-            case LEFT:
-                y = y + TANK_HEIGHT / 2;
-                break;
-            case RIGHT:
-                x = x + TANK_WIDTH;
-                y = y + TANK_HEIGHT / 2;
-                break;
-            case UP:
-                x = x + TANK_WIDTH / 2;
-                break;
-            case DOWN:
-                x = x + TANK_WIDTH / 2;
-                y = y + TANK_HEIGHT;
-                break;
-            default:
-                break;
-        }
+        int x = this.x + Tank.TANK_WIDTH / 2;
+        int y = this.y + Tank.TANK_HEIGHT / 2;
         this.tankFrame.bullets.add(new Bullet(x, y, this.dir, this.group, this.tankFrame));
     }
 
