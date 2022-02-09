@@ -18,7 +18,7 @@ public class Bullet {
     private TankFrame tankFrame = null;
     private Group group = Group.BAD;
 
-    public Bullet() {
+    private Bullet() {
     }
 
     public Bullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
@@ -73,6 +73,7 @@ public class Bullet {
         Rectangle rectangleBullet = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle rectangleTank = new Rectangle(tank.getX(), tank.getY(), Tank.TANK_WIDTH, Tank.TANK_HEIGHT);
         if (rectangleBullet.intersects(rectangleTank)) {
+            this.tankFrame.explodes.add(new Explode(tank.getX() + Tank.TANK_WIDTH / 2, tank.getY() + Tank.TANK_HEIGHT / 2, this.tankFrame));
             this.die();
             tank.die();
         }

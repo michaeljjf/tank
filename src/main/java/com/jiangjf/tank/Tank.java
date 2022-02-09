@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Tank {
     private int x, y;
-    static final int SPEED = 5;
+    static final int SPEED = 3;
     static final int TANK_WIDTH = ResourceMgr.tankLeft.getWidth();
     static final int TANK_HEIGHT = ResourceMgr.tankLeft.getHeight();
     private Dir dir = Dir.DOWN;
@@ -19,7 +19,7 @@ public class Tank {
     private boolean living = true;
     private TankFrame tankFrame = null;
     private Group group = Group.BAD;
-    private Random random = new Random();
+    private static final Random random = new Random();
 
     public Group getGroup() {
         return group;
@@ -41,7 +41,7 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank() {
+    private Tank() {
     }
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {

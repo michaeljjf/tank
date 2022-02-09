@@ -21,6 +21,7 @@ public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
     List<Tank> tanks = new ArrayList<>();
     List<Bullet> bullets = new ArrayList<>();
+    List<Explode> explodes = new ArrayList<>();
 
     public TankFrame() {
         // 设置窗口大小
@@ -63,6 +64,11 @@ public class TankFrame extends Frame {
         // 画出子弹
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
+        }
+
+        // 画出爆炸效果
+        for (int i = 0; i < explodes.size(); i++) {
+            explodes.get(i).paint(g);
         }
 
         // 子弹与敌方坦克是否碰撞
