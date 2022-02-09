@@ -1,6 +1,7 @@
 package com.jiangjf.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * 坦克
@@ -17,6 +18,12 @@ public class Tank {
     private boolean moving = false;
     private boolean living = true;
     private TankFrame tankFrame = null;
+    private Group group = Group.BAD;
+    private Random random = new Random();
+
+    public Group getGroup() {
+        return group;
+    }
 
     public int getX() {
         return x;
@@ -37,16 +44,18 @@ public class Tank {
     public Tank() {
     }
 
-    public Tank(int x, int y, Dir dir, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
 
     public void paint(Graphics g) {
         if (!living) {
             this.tankFrame.tanks.remove(this);
+            return;
         }
         switch (dir) {
             case LEFT:
@@ -89,6 +98,11 @@ public class Tank {
             default:
                 break;
         }
+
+        // 敌方坦克随机发射子弹
+        if (this.group.equals(Group.BAD) && random.nextInt(15) == 8) {
+            this.fire();
+        }
     }
 
     /**
@@ -119,7 +133,7 @@ public class Tank {
             default:
                 break;
         }
-        this.tankFrame.bullets.add(new Bullet(x, y, this.dir, this.tankFrame));
+        this.tankFrame.bullets.add(new Bullet(x, y, this.dir, this.group, this.tankFrame));
     }
 
     public void die() {

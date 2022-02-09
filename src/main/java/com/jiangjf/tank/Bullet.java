@@ -16,21 +16,24 @@ public class Bullet {
     private Dir dir;
     private boolean living = true;
     private TankFrame tankFrame = null;
+    private Group group = Group.BAD;
 
     public Bullet() {
     }
 
-    public Bullet(int x, int y, Dir dir, TankFrame tankFrame) {
+    public Bullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         // 让子弹的坐标，在坦克中间
         this.x = x - WIDTH / 2;
         this.y = y - HEIGHT / 2;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
 
     public void paint(Graphics g) {
         if (!this.living) {
             this.tankFrame.bullets.remove(this);
+            return;
         }
 //        Color color = g.getColor();
 //        g.setColor(Color.RED);
@@ -63,6 +66,10 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
+        // 子弹的类型如果和坦克一样，不检查碰撞
+        if (this.group.equals(tank.getGroup())) {
+            return;
+        }
         Rectangle rectangleBullet = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle rectangleTank = new Rectangle(tank.getX(), tank.getY(), Tank.TANK_WIDTH, Tank.TANK_HEIGHT);
         if (rectangleBullet.intersects(rectangleTank)) {

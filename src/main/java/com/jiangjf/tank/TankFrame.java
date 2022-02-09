@@ -18,7 +18,7 @@ import java.util.Random;
 public class TankFrame extends Frame {
 
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    Tank myTank = new Tank(200, 400, Dir.UP, this);
+    Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
     List<Tank> tanks = new ArrayList<>();
     List<Bullet> bullets = new ArrayList<>();
 
@@ -70,6 +70,7 @@ public class TankFrame extends Frame {
             for (int j = 0; j < tanks.size(); j++) {
                 bullets.get(i).collideWith(tanks.get(j));
             }
+            bullets.get(i).collideWith(myTank);
         }
 
         // 下面这种通过迭代器方式在bullets.remove()的时候会越界报错

@@ -1,9 +1,5 @@
 package com.jiangjf.tank;
 
-
-import java.awt.*;
-import java.util.Random;
-
 /**
  * tank war
  *
@@ -15,8 +11,8 @@ public class Main {
         TankFrame tankFrame = new TankFrame();
         // 初始化敌方坦克
         for (int i = 0; i < 5; i++) {
-            Tank tank = new Tank(50 + i * 80, 200, Dir.DOWN, tankFrame);
-//            tank.setMoving(true);
+            Tank tank = new Tank(50 + i * 80, 90, Dir.DOWN, Group.BAD, tankFrame);
+            tank.setMoving(true);
             tankFrame.tanks.add(tank);
         }
 
