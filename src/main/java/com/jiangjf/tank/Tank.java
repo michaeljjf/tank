@@ -19,7 +19,7 @@ public class Tank {
     private boolean living = true;
     private TankFrame tankFrame = null;
     private Group group = Group.BAD;
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     public Group getGroup() {
         return group;
@@ -39,6 +39,10 @@ public class Tank {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+    }
+
+    public boolean getLiving() {
+        return this.living;
     }
 
     private Tank() {
@@ -100,7 +104,7 @@ public class Tank {
         }
 
         // 敌方坦克随机发射子弹
-        if (this.group.equals(Group.BAD) && random.nextInt(15) == 8) {
+        if (this.group.equals(Group.BAD) && RANDOM.nextInt(15) == 8) {
             this.fire();
         }
     }
