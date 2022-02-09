@@ -1,5 +1,8 @@
 package com.jiangjf.tank;
 
+import com.jiangjf.tank.utils.Audio;
+import com.jiangjf.tank.utils.ResourceMgr;
+
 import java.awt.*;
 
 /**

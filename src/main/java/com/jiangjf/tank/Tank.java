@@ -1,5 +1,9 @@
 package com.jiangjf.tank;
 
+import com.jiangjf.tank.enums.Dir;
+import com.jiangjf.tank.enums.Group;
+import com.jiangjf.tank.utils.ResourceMgr;
+
 import java.awt.*;
 import java.util.Random;
 

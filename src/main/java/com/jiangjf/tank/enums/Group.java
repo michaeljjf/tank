@@ -1,4 +1,4 @@
-package com.jiangjf.tank;
+package com.jiangjf.tank.enums;
 
 /**
  * 坦克分组

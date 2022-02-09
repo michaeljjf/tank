@@ -1,4 +1,4 @@
-package com.jiangjf.tank;
+package com.jiangjf.tank.enums;
 
 /**
  * 四个方向

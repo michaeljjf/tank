@@ -1,5 +1,8 @@
 package com.jiangjf.tank;
 
+import com.jiangjf.tank.enums.Dir;
+import com.jiangjf.tank.enums.Group;
+
 /**
  * tank war
  *

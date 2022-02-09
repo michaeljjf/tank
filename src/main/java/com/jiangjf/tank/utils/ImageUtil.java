@@ -1,4 +1,4 @@
-package com.jiangjf.tank;
+package com.jiangjf.tank.utils;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;

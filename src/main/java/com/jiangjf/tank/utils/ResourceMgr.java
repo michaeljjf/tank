@@ -1,4 +1,4 @@
-package com.jiangjf.tank;
+package com.jiangjf.tank.utils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

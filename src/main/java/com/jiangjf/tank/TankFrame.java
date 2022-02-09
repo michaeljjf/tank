@@ -1,5 +1,8 @@
 package com.jiangjf.tank;
 
+import com.jiangjf.tank.enums.Dir;
+import com.jiangjf.tank.enums.Group;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
