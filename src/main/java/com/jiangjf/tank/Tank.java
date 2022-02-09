@@ -20,6 +20,11 @@ public class Tank {
     private TankFrame tankFrame = null;
     private Group group = Group.BAD;
     private static final Random RANDOM = new Random();
+    private final Rectangle rectangle = new Rectangle();
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
 
     public Group getGroup() {
         return group;
@@ -54,6 +59,10 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
+        rectangle.x = this.x;
+        rectangle.y = this.y;
+        rectangle.width = TANK_WIDTH;
+        rectangle.height = TANK_HEIGHT;
     }
 
     public void paint(Graphics g) {
@@ -103,20 +112,34 @@ public class Tank {
             default:
                 break;
         }
-
-        if (x <= 0 || y <= 0) {
-            this.dir = Dir.DOWN;
-        }
-        if (x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT) {
-            this.dir = Dir.LEFT;
-        }
+        rectangle.x = this.x;
+        rectangle.y = this.y;
         // 敌方坦克随机发射子弹
-        if (this.group.equals(Group.BAD) && RANDOM.nextInt(100) > 95) {
+        if (this.group.equals(Group.BAD) && RANDOM.nextInt(100) > 96) {
             this.fire();
         }
         // 敌方坦克随机移动
-        if (this.group.equals(Group.BAD) && RANDOM.nextInt(80) > 77) {
+        if (this.group.equals(Group.BAD) && RANDOM.nextInt(100) > 98) {
             this.randomDir();
+        }
+        boundsCheck();
+    }
+
+    /**
+     * 边界检测
+     */
+    private void boundsCheck() {
+        if (this.x < 4) {
+            this.x = 4;
+        }
+        if (this.y < 42) {
+            this.y = 42;
+        }
+        if (this.x > TankFrame.GAME_WIDTH - Tank.TANK_WIDTH - 4) {
+            this.x = TankFrame.GAME_WIDTH - Tank.TANK_WIDTH - 4;
+        }
+        if (this.y > TankFrame.GAME_HEIGHT - Tank.TANK_HEIGHT - 4) {
+            this.y = TankFrame.GAME_HEIGHT - Tank.TANK_HEIGHT - 4;
         }
     }
 
