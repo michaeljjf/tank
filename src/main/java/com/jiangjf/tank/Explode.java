@@ -13,8 +13,8 @@ import java.awt.*;
  */
 public class Explode {
     private int x, y;
-    private static final int WIDTH = ResourceMgr.explodes[0].getWidth();
-    private static final int HEIGHT = ResourceMgr.explodes[0].getHeight();
+    private static final int WIDTH = ResourceMgr.getInstance().explodes[0].getWidth();
+    private static final int HEIGHT = ResourceMgr.getInstance().explodes[0].getHeight();
     private TankFrame tankFrame;
     private int step = 0;
 
@@ -31,8 +31,8 @@ public class Explode {
     }
 
     public void paint(Graphics g) {
-        g.drawImage(ResourceMgr.explodes[step++], this.x - WIDTH / 2, this.y - HEIGHT / 2, null);
-        if (step >= ResourceMgr.explodes.length) {
+        g.drawImage(ResourceMgr.getInstance().explodes[step++], this.x - WIDTH / 2, this.y - HEIGHT / 2, null);
+        if (step >= ResourceMgr.getInstance().explodes.length) {
             this.tankFrame.explodes.remove(this);
         }
     }

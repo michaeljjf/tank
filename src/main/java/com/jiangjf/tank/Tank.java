@@ -16,8 +16,8 @@ import java.util.Random;
 public class Tank {
     private int x, y;
     static final int SPEED = 5;
-    static final int TANK_WIDTH = ResourceMgr.tankLeft.getWidth();
-    static final int TANK_HEIGHT = ResourceMgr.tankLeft.getHeight();
+    static final int TANK_WIDTH = ResourceMgr.getInstance().tankLeft.getWidth();
+    static final int TANK_HEIGHT = ResourceMgr.getInstance().tankLeft.getHeight();
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
     private boolean living = true;
@@ -77,17 +77,17 @@ public class Tank {
         boolean isGood = this.group.equals(Group.GOOD);
         switch (dir) {
             case LEFT:
-                g.drawImage(isGood ? ResourceMgr.tankLeft : ResourceMgr.badTankLeft, x, y, null);
+                g.drawImage(isGood ? ResourceMgr.getInstance().tankLeft : ResourceMgr.getInstance().badTankLeft, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(isGood ? ResourceMgr.tankRight : ResourceMgr.badTankRight, x, y, null);
+                g.drawImage(isGood ? ResourceMgr.getInstance().tankRight : ResourceMgr.getInstance().badTankRight, x, y, null);
                 break;
             case UP:
-                g.drawImage(isGood ? ResourceMgr.tankUp : ResourceMgr.badTankUp, x, y, null);
+                g.drawImage(isGood ? ResourceMgr.getInstance().tankUp : ResourceMgr.getInstance().badTankUp, x, y, null);
                 break;
             default:
             case DOWN:
-                g.drawImage(isGood ? ResourceMgr.tankDown : ResourceMgr.badTankDown, x, y, null);
+                g.drawImage(isGood ? ResourceMgr.getInstance().tankDown : ResourceMgr.getInstance().badTankDown, x, y, null);
                 break;
         }
         move();
