@@ -9,12 +9,14 @@ import java.io.IOException;
  * @date 2022/2/8
  */
 public class ResourceMgr {
-    public static BufferedImage tankLeft, tankRight, tankUp, tankDown;
-    public static BufferedImage badTankLeft, badTankRight, badTankUp, badTankDown;
-    public static BufferedImage bulletUp, bulletDown, bulletLeft, bulletRight;
-    public static BufferedImage[] explodes = new BufferedImage[16];
+    private static final ResourceMgr INSTANCE = new ResourceMgr();
 
-    static {
+    public BufferedImage tankLeft, tankRight, tankUp, tankDown;
+    public BufferedImage badTankLeft, badTankRight, badTankUp, badTankDown;
+    public BufferedImage bulletUp, bulletDown, bulletLeft, bulletRight;
+    public BufferedImage[] explodes = new BufferedImage[16];
+
+    private ResourceMgr() {
         try {
             ClassLoader classLoader = ResourceMgr.class.getClassLoader();
 
@@ -39,5 +41,9 @@ public class ResourceMgr {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ResourceMgr getInstance() {
+        return INSTANCE;
     }
 }
