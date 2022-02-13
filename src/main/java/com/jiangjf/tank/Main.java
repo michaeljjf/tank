@@ -1,10 +1,11 @@
 package com.jiangjf.tank;
 
+import com.jiangjf.tank.strategy.DefaultFireStrategy;
 import com.jiangjf.tank.enums.Dir;
 import com.jiangjf.tank.enums.Group;
 
 /**
- * tank war
+ * 坦克大战
  *
  * @author jiangjf
  * @date 2022/2/7

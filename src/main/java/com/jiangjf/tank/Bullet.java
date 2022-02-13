@@ -37,6 +37,7 @@ public class Bullet {
         rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
+        this.tankFrame.bullets.add(this);
     }
 
     public void paint(Graphics g) {

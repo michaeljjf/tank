@@ -1,5 +1,7 @@
 package com.jiangjf.tank;
 
+import com.jiangjf.tank.strategy.DefaultFireStrategy;
+import com.jiangjf.tank.strategy.FireStrategy;
 import com.jiangjf.tank.enums.Dir;
 import com.jiangjf.tank.enums.Group;
 import com.jiangjf.tank.utils.ResourceMgr;
@@ -16,8 +18,8 @@ import java.util.Random;
 public class Tank {
     private int x, y;
     static final int SPEED = 5;
-    static final int TANK_WIDTH = ResourceMgr.getInstance().tankLeft.getWidth();
-    static final int TANK_HEIGHT = ResourceMgr.getInstance().tankLeft.getHeight();
+    public static final int TANK_WIDTH = ResourceMgr.getInstance().tankLeft.getWidth();
+    public static final int TANK_HEIGHT = ResourceMgr.getInstance().tankLeft.getHeight();
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
     private boolean living = true;
@@ -25,6 +27,7 @@ public class Tank {
     private Group group = Group.BAD;
     private static final Random RANDOM = new Random();
     private final Rectangle rectangle = new Rectangle();
+    private FireStrategy fireStrategy = new DefaultFireStrategy();
 
     public Rectangle getRectangle() {
         return rectangle;
@@ -50,8 +53,16 @@ public class Tank {
         this.dir = dir;
     }
 
+    public Dir getDir() {
+        return this.dir;
+    }
+
     public boolean getLiving() {
         return this.living;
+    }
+
+    public TankFrame getTankFrame() {
+        return this.tankFrame;
     }
 
     private Tank() {
@@ -67,6 +78,11 @@ public class Tank {
         rectangle.y = this.y;
         rectangle.width = TANK_WIDTH;
         rectangle.height = TANK_HEIGHT;
+    }
+
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame, FireStrategy fireStrategy) {
+        this(x, y, dir, group, tankFrame);
+        this.fireStrategy = fireStrategy;
     }
 
     public void paint(Graphics g) {
@@ -156,13 +172,11 @@ public class Tank {
      * 开火
      */
     public void fire() {
-        // 中心位置
-        int x = this.x + Tank.TANK_WIDTH / 2;
-        int y = this.y + Tank.TANK_HEIGHT / 2;
-        this.tankFrame.bullets.add(new Bullet(x, y, this.dir, this.group, this.tankFrame));
+        this.fireStrategy.fire(this);
     }
 
     public void die() {
         this.living = false;
     }
+
 }
