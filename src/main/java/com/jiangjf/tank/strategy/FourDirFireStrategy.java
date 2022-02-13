@@ -16,7 +16,7 @@ public class FourDirFireStrategy implements FireStrategy {
         // 中心位置
         int x = tank.getX() + Tank.TANK_WIDTH / 2;
         int y = tank.getY() + Tank.TANK_HEIGHT / 2;
-        for(Dir dir : Dir.values()) {
+        for (Dir dir : Dir.values()) {
             new Bullet(x, y, dir, tank.getGroup(), tank.getTankFrame());
         }
     }

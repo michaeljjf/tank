@@ -2,9 +2,6 @@ package com.jiangjf.tank.strategy;
 
 import com.jiangjf.tank.Tank;
 
-import java.util.List;
-
-
 /**
  * 开火策略
  *
