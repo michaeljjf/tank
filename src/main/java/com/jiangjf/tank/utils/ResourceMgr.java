@@ -14,7 +14,14 @@ public class ResourceMgr {
     public BufferedImage tankLeft, tankRight, tankUp, tankDown;
     public BufferedImage badTankLeft, badTankRight, badTankUp, badTankDown;
     public BufferedImage bulletUp, bulletDown, bulletLeft, bulletRight;
+    /**
+     * 第一种开火效果
+     */
     public BufferedImage[] explodes = new BufferedImage[16];
+    /**
+     * 第二种开火效果
+     */
+    public BufferedImage[] secondExplodes = new BufferedImage[11];
 
     private ResourceMgr() {
         try {
@@ -37,6 +44,10 @@ public class ResourceMgr {
 
             for (int i = 0; i < explodes.length; i++) {
                 explodes[i] = ImageIO.read(classLoader.getResourceAsStream("images/e" + (i + 1) + ".gif"));
+            }
+
+            for (int i = 0; i < secondExplodes.length; i++) {
+                secondExplodes[i] = ImageIO.read(classLoader.getResourceAsStream("images/" + i + ".gif"));
             }
         } catch (IOException e) {
             e.printStackTrace();

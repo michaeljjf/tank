@@ -1,5 +1,9 @@
 package com.jiangjf.tank;
 
+import com.jiangjf.tank.myabstract.BaseExplode;
+import com.jiangjf.tank.myabstract.DefaultFactory;
+import com.jiangjf.tank.myabstract.GameFactory;
+import com.jiangjf.tank.myabstract.SecondFactory;
 import com.jiangjf.tank.strategy.FourDirFireStrategy;
 import com.jiangjf.tank.enums.Dir;
 import com.jiangjf.tank.enums.Group;
@@ -13,17 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * tank war
+ * 坦克大战
  *
  * @author jiangjf
  * @date 2022/2/7
  */
 public class TankFrame extends Frame {
-    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
+    public static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
     Tank myTank = new Tank(210, 400, Dir.UP, Group.GOOD, this, new FourDirFireStrategy());
-    List<Tank> tanks = new ArrayList<>();
-    List<Bullet> bullets = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
+    public List<Tank> tanks = new ArrayList<>();
+    public List<Bullet> bullets = new ArrayList<>();
+    public List<BaseExplode> explodes = new ArrayList<>();
+    public GameFactory gameFactory = new SecondFactory();
 
     public TankFrame() {
         // 设置窗口大小

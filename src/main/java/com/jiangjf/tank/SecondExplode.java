@@ -7,22 +7,20 @@ import com.jiangjf.tank.utils.ResourceMgr;
 import java.awt.*;
 
 /**
- * 爆炸
+ * 第二种爆炸
  *
  * @author jiangjf
  * @date 2022/2/9
  */
-public class Explode extends BaseExplode {
+public class SecondExplode extends BaseExplode {
     private int x, y;
-    private static final int WIDTH = ResourceMgr.getInstance().explodes[0].getWidth();
-    private static final int HEIGHT = ResourceMgr.getInstance().explodes[0].getHeight();
     private TankFrame tankFrame;
     private int step = 0;
 
-    private Explode() {
+    private SecondExplode() {
     }
 
-    public Explode(int x, int y, TankFrame tankFrame) {
+    public SecondExplode(int x, int y, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.tankFrame = tankFrame;
@@ -33,8 +31,11 @@ public class Explode extends BaseExplode {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(ResourceMgr.getInstance().explodes[step++], this.x - WIDTH / 2, this.y - HEIGHT / 2, null);
-        if (step >= ResourceMgr.getInstance().explodes.length) {
+        int width = ResourceMgr.getInstance().secondExplodes[step].getWidth();
+        int height = ResourceMgr.getInstance().secondExplodes[step].getHeight();
+        g.drawImage(ResourceMgr.getInstance().secondExplodes[step], this.x - width / 2, this.y - height / 2, null);
+        step++;
+        if (step >= ResourceMgr.getInstance().secondExplodes.length) {
             this.tankFrame.explodes.remove(this);
         }
     }

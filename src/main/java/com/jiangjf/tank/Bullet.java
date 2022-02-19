@@ -2,6 +2,7 @@ package com.jiangjf.tank;
 
 import com.jiangjf.tank.enums.Dir;
 import com.jiangjf.tank.enums.Group;
+import com.jiangjf.tank.myabstract.BaseExplode;
 import com.jiangjf.tank.utils.ResourceMgr;
 
 import java.awt.*;
@@ -94,7 +95,8 @@ public class Bullet {
             return;
         }
         if (this.rectangle.intersects(tank.getRectangle()) && tank.getLiving()) {
-            this.tankFrame.explodes.add(new Explode(tank.getX() + Tank.TANK_WIDTH / 2, tank.getY() + Tank.TANK_HEIGHT / 2, this.tankFrame));
+            BaseExplode explode = this.tankFrame.gameFactory.createExplode(tank.getX() + Tank.TANK_WIDTH / 2, tank.getY() + Tank.TANK_HEIGHT / 2, this.tankFrame);
+            this.tankFrame.explodes.add(explode);
             this.die();
             tank.die();
         }
