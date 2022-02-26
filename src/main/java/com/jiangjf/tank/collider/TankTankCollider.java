@@ -15,7 +15,7 @@ public class TankTankCollider implements Collider {
             Tank tank1 = (Tank) o1;
             Tank tank2 = (Tank) o2;
             if (tank1.getRectangle().intersects(tank2.getRectangle()) && tank2.getLiving()) {
-                // 回到前一个位置
+                // 要碰撞时，回到前一个位置
                 tank1.toPrevLocation();
                 tank2.toPrevLocation();
             }
