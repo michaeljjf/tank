@@ -2,6 +2,7 @@ package com.jiangjf.tank;
 
 import com.jiangjf.tank.collider.BulletTankCollider;
 import com.jiangjf.tank.collider.Collider;
+import com.jiangjf.tank.collider.ColliderChain;
 import com.jiangjf.tank.enums.Dir;
 import com.jiangjf.tank.enums.Group;
 
@@ -18,7 +19,7 @@ import java.util.List;
 public class GameModel {
     private final Tank myTank = new Tank(210, 400, Dir.UP, Group.GOOD, this);
     List<GameObject> objects = new ArrayList<>();
-    Collider collider = new BulletTankCollider();
+    ColliderChain chain = new ColliderChain();
 
     public Tank getMainTank() {
         return this.myTank;
@@ -44,7 +45,7 @@ public class GameModel {
         // 简单的碰撞
         for (int i = 0; i < objects.size(); i++) {
             for (int j = i + 1; j < objects.size(); j++) {
-                collider.collideWith(objects.get(i), objects.get(j));
+                chain.collide(objects.get(i), objects.get(j));
             }
         }
     }

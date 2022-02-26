@@ -14,6 +14,7 @@ public abstract class GameObject {
     protected Group group;
     public boolean living = true;
     protected int x, y;
+    protected int prevX, prevY;
     protected Rectangle rectangle = new Rectangle();
 
     public Group getGroup() {

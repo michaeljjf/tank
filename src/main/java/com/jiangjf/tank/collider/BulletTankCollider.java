@@ -3,12 +3,14 @@ package com.jiangjf.tank.collider;
 import com.jiangjf.tank.*;
 
 /**
+ * 子弹和坦克碰撞
+ *
  * @author jiangjf
  * @date 2022/2/26
  */
 public class BulletTankCollider implements Collider {
     @Override
-    public void collideWith(GameObject o1, GameObject o2) {
+    public void collide(GameObject o1, GameObject o2) {
         if (o1 instanceof Bullet && o2 instanceof Tank) {
             Bullet bullet = (Bullet) o1;
             Tank tank = (Tank) o2;
@@ -22,7 +24,7 @@ public class BulletTankCollider implements Collider {
                 tank.die();
             }
         } else if (o1 instanceof Tank && o2 instanceof Bullet) {
-            this.collideWith(o2, o1);
+            this.collide(o2, o1);
         }
     }
 }

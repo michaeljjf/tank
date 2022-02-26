@@ -74,21 +74,23 @@ public class Tank extends GameObject {
      * 移动位置
      */
     private void move() {
+        this.prevX = this.x;
+        this.prevY = this.y;
         if (!moving) {
             return;
         }
         switch (dir) {
             case LEFT:
-                x -= SPEED;
+                this.x -= SPEED;
                 break;
             case RIGHT:
-                x += SPEED;
+                this.x += SPEED;
                 break;
             case UP:
-                y -= SPEED;
+                this.y -= SPEED;
                 break;
             case DOWN:
-                y += SPEED;
+                this.y += SPEED;
                 break;
             default:
                 break;
@@ -141,5 +143,10 @@ public class Tank extends GameObject {
 
     public void die() {
         this.living = false;
+    }
+
+    public void toPrevLocation() {
+        this.x = this.prevX;
+        this.y = this.prevY;
     }
 }
