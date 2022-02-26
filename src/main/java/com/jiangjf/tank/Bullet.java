@@ -12,36 +12,33 @@ import java.awt.*;
  * @author jiangjf
  * @date 2022/2/8
  */
-public class Bullet {
+public class Bullet extends GameObject {
     private static final int SPEED = 15;
     private static final int WIDTH = ResourceMgr.getInstance().bulletUp.getWidth();
     private static final int HEIGHT = ResourceMgr.getInstance().bulletUp.getHeight();
-    private int x, y;
     private Dir dir;
-    private boolean living = true;
-    private TankFrame tankFrame = null;
-    private Group group = Group.BAD;
-    private final Rectangle rectangle = new Rectangle();
+    private GameModel gameModel = null;
 
     private Bullet() {
     }
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gameModel) {
         // 让子弹的坐标，在坦克中间
         this.x = x - WIDTH / 2;
         this.y = y - HEIGHT / 2;
         this.dir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gameModel = gameModel;
         rectangle.x = this.x;
         rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!this.living) {
-            this.tankFrame.bullets.remove(this);
+            this.gameModel.remove(this);
             return;
         }
         switch (dir) {
@@ -87,19 +84,7 @@ public class Bullet {
         }
     }
 
-    public void collideWith(Tank tank) {
-        // 子弹的类型如果和坦克一样，不检查碰撞
-        if (this.group.equals(tank.getGroup())) {
-            return;
-        }
-        if (this.rectangle.intersects(tank.getRectangle()) && tank.getLiving()) {
-            this.tankFrame.explodes.add(new Explode(tank.getX() + Tank.TANK_WIDTH / 2, tank.getY() + Tank.TANK_HEIGHT / 2, this.tankFrame));
-            this.die();
-            tank.die();
-        }
-    }
-
-    private void die() {
+    public void die() {
         this.living = false;
     }
 }

@@ -14,9 +14,9 @@ public class Main {
         TankFrame tankFrame = new TankFrame();
         // 初始化敌方坦克
         for (int i = 0; i < 5; i++) {
-            Tank tank = new Tank(50 + i * 120, 70, Dir.DOWN, Group.BAD, tankFrame);
+            Tank tank = new Tank(50 + i * 120, 70, Dir.DOWN, Group.BAD, TankFrame.GAME_MODEL);
             tank.setMoving(true);
-            tankFrame.tanks.add(tank);
+            TankFrame.GAME_MODEL.add(tank);
         }
 
         while (true) {

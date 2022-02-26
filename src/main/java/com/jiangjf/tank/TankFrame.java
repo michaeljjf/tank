@@ -1,15 +1,12 @@
 package com.jiangjf.tank;
 
 import com.jiangjf.tank.enums.Dir;
-import com.jiangjf.tank.enums.Group;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * tank war
@@ -20,10 +17,8 @@ import java.util.List;
 public class TankFrame extends Frame {
 
     static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
-    Tank myTank = new Tank(210, 400, Dir.UP, Group.GOOD, this);
-    List<Tank> tanks = new ArrayList<>();
-    List<Bullet> bullets = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
+
+    public static final GameModel GAME_MODEL = new GameModel();
 
     public TankFrame() {
         // 设置窗口大小
@@ -49,42 +44,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        Color color = g.getColor();
-        g.setColor(Color.BLACK);
-        g.drawString("子弹数量：" + bullets.size(), 15, 50);
-        g.drawString("敌方坦克数量：" + tanks.size(), 95, 50);
-        g.setColor(color);
-
-        // 画出我方坦克
-        myTank.paint(g);
-
-        // 画出敌方坦克
-        for (int i = 0; i < tanks.size(); i++) {
-            tanks.get(i).paint(g);
-        }
-
-        // 画出子弹
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).paint(g);
-        }
-
-        // 画出爆炸效果
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
-        }
-
-        // 子弹与敌方坦克是否碰撞
-        for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < tanks.size(); j++) {
-                bullets.get(i).collideWith(tanks.get(j));
-            }
-            bullets.get(i).collideWith(myTank);
-        }
-
-        // 下面这种通过迭代器方式在bullets.remove()的时候会越界报错
-//        for (Bullet bullet : bullets) {
-//            bullet.paint(g);
-//        }
+        GAME_MODEL.paint(g);
     }
 
     /**
@@ -150,7 +110,7 @@ public class TankFrame extends Frame {
                     boolDown = false;
                     break;
                 case KeyEvent.VK_SPACE:
-                    myTank.fire();
+                    GAME_MODEL.getMainTank().fire();
                 default:
                     break;
             }
@@ -158,6 +118,7 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
+            Tank myTank = GAME_MODEL.getMainTank();
             if (!boolLeft && !boolRight && !boolUp && !boolDown) {
                 myTank.setMoving(false);
             } else {

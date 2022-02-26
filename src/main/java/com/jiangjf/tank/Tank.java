@@ -13,34 +13,14 @@ import java.util.Random;
  * @author jiangjf
  * @date 2022/2/8
  */
-public class Tank {
-    private int x, y;
+public class Tank extends GameObject {
     static final int SPEED = 5;
-    static final int TANK_WIDTH = ResourceMgr.getInstance().tankLeft.getWidth();
-    static final int TANK_HEIGHT = ResourceMgr.getInstance().tankLeft.getHeight();
+    public static final int TANK_WIDTH = ResourceMgr.getInstance().tankLeft.getWidth();
+    public static final int TANK_HEIGHT = ResourceMgr.getInstance().tankLeft.getHeight();
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
-    private boolean living = true;
-    private TankFrame tankFrame = null;
-    private Group group = Group.BAD;
+    private GameModel gameModel = null;
     private static final Random RANDOM = new Random();
-    private final Rectangle rectangle = new Rectangle();
-
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 
     public void setMoving(boolean moving) {
         this.moving = moving;
@@ -50,28 +30,25 @@ public class Tank {
         this.dir = dir;
     }
 
-    public boolean getLiving() {
-        return this.living;
-    }
-
     private Tank() {
     }
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gameModel) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gameModel = gameModel;
         rectangle.x = this.x;
         rectangle.y = this.y;
         rectangle.width = TANK_WIDTH;
         rectangle.height = TANK_HEIGHT;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
-            this.tankFrame.tanks.remove(this);
+            this.gameModel.remove(this);
             return;
         }
         boolean isGood = this.group.equals(Group.GOOD);
@@ -159,7 +136,7 @@ public class Tank {
         // 中心位置
         int x = this.x + Tank.TANK_WIDTH / 2;
         int y = this.y + Tank.TANK_HEIGHT / 2;
-        this.tankFrame.bullets.add(new Bullet(x, y, this.dir, this.group, this.tankFrame));
+        this.gameModel.add(new Bullet(x, y, this.dir, this.group, this.gameModel));
     }
 
     public void die() {
