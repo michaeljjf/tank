@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 使用Facade模式，管理相关对象
+ * 使用Facade模式，管理相关对象，TankFrame只需要和GameModel打交道，再由GameModel与Tank、Bullet、Explode打交道
  *
  * @author jiangjf
  * @date 2022/2/24

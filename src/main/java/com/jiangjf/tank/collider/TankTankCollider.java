@@ -10,15 +10,16 @@ import com.jiangjf.tank.*;
  */
 public class TankTankCollider implements Collider {
     @Override
-    public void collide(GameObject o1, GameObject o2) {
+    public Boolean collide(GameObject o1, GameObject o2) {
         if (o1 instanceof Tank && o2 instanceof Tank) {
             Tank tank1 = (Tank) o1;
             Tank tank2 = (Tank) o2;
-            if (tank1.getRectangle().intersects(tank2.getRectangle()) && tank2.getLiving()) {
+            if (tank1.getRectangle().intersects(tank2.getRectangle())) {
                 // 要碰撞时，回到前一个位置
                 tank1.toPrevLocation();
                 tank2.toPrevLocation();
             }
         }
+        return true;
     }
 }
