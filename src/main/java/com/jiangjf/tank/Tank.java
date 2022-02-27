@@ -21,9 +21,24 @@ public class Tank extends GameObject {
     private boolean moving = false;
     private GameModel gameModel = null;
     private static final Random RANDOM = new Random();
+    private boolean living = true;
+    private Group group;
+    private final Rectangle rectangle = new Rectangle();
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public boolean getLiving() {
+        return this.living;
+    }
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
     public void setDir(Dir dir) {
@@ -145,7 +160,7 @@ public class Tank extends GameObject {
         this.living = false;
     }
 
-    public void toPrevLocation() {
+    public void back() {
         this.x = this.prevX;
         this.y = this.prevY;
     }

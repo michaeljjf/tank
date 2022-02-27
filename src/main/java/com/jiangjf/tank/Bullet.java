@@ -18,6 +18,17 @@ public class Bullet extends GameObject {
     private static final int HEIGHT = ResourceMgr.getInstance().bulletUp.getHeight();
     private Dir dir;
     private GameModel gameModel = null;
+    private Group group;
+    private boolean living = true;
+    private final Rectangle rectangle = new Rectangle();
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
 
     private Bullet() {
     }

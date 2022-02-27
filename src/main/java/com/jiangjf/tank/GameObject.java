@@ -1,7 +1,5 @@
 package com.jiangjf.tank;
 
-import com.jiangjf.tank.enums.Group;
-
 import java.awt.*;
 
 /**
@@ -11,23 +9,8 @@ import java.awt.*;
  * @date 2022/2/24
  */
 public abstract class GameObject {
-    protected Group group;
-    public boolean living = true;
     protected int x, y;
     protected int prevX, prevY;
-    protected Rectangle rectangle = new Rectangle();
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
-
-    public boolean getLiving() {
-        return this.living;
-    }
 
     public int getX() {
         return x;
