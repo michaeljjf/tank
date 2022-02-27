@@ -39,7 +39,7 @@ public class Audio {
 
 	private AudioFormat audioFormat = null;
 	private SourceDataLine sourceDataLine = null;
-	private DataLine.Info dataLine_info = null;
+	private DataLine.Info dataLineInfo = null;
 
 	private AudioInputStream audioInputStream = null;
 
@@ -47,8 +47,8 @@ public class Audio {
 		try {
 			audioInputStream = AudioSystem.getAudioInputStream(Audio.class.getClassLoader().getResource(fileName));
 			audioFormat = audioInputStream.getFormat();
-			dataLine_info = new DataLine.Info(SourceDataLine.class, audioFormat);
-			sourceDataLine = (SourceDataLine) AudioSystem.getLine(dataLine_info);
+			dataLineInfo = new DataLine.Info(SourceDataLine.class, audioFormat);
+			sourceDataLine = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -19,7 +19,6 @@ public class Tank extends GameObject {
     public static final int TANK_HEIGHT = ResourceMgr.getInstance().tankLeft.getHeight();
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
-    private GameModel gameModel = null;
     private static final Random RANDOM = new Random();
     private boolean living = true;
     private Group group;
@@ -48,12 +47,11 @@ public class Tank extends GameObject {
     private Tank() {
     }
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gameModel) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gameModel = gameModel;
         rectangle.x = this.x;
         rectangle.y = this.y;
         rectangle.width = TANK_WIDTH;
@@ -63,7 +61,7 @@ public class Tank extends GameObject {
     @Override
     public void paint(Graphics g) {
         if (!living) {
-            this.gameModel.remove(this);
+            GameModel.getInstance().remove(this);
             return;
         }
         boolean isGood = this.group.equals(Group.GOOD);
@@ -153,7 +151,7 @@ public class Tank extends GameObject {
         // 中心位置
         int x = this.x + Tank.TANK_WIDTH / 2;
         int y = this.y + Tank.TANK_HEIGHT / 2;
-        this.gameModel.add(new Bullet(x, y, this.dir, this.group, this.gameModel));
+        GameModel.getInstance().add(new Bullet(x, y, this.dir, this.group));
     }
 
     public void die() {

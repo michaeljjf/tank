@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class GameModel {
     private static final GameModel INSTANCE = new GameModel();
-    private final Tank myTank = new Tank(230, 400, Dir.UP, Group.GOOD, this);
+    private final Tank myTank = new Tank(230, 400, Dir.UP, Group.GOOD);
     List<GameObject> objects = new ArrayList<>();
     ColliderChain chain = new ColliderChain();
 
@@ -27,16 +27,16 @@ public class GameModel {
     private GameModel() {
         // 初始化敌方坦克
         for (int i = 0; i < 5; i++) {
-            Tank tank = new Tank(50 + i * 120, 70, Dir.DOWN, Group.BAD, this);
+            Tank tank = new Tank(50 + i * 120, 70, Dir.DOWN, Group.BAD);
             tank.setMoving(true);
-            this.add(tank);
+            add(tank);
         }
 
         // 初始化墙
-        this.add(new Wall(110, 100, 60, 300));
-        this.add(new Wall(410, 320, 60, 300));
-        this.add(new Wall(810, 100, 60, 300));
-        this.add(new Wall(210, 800, 600, 60));
+        add(new Wall(110, 100, 60, 300));
+        add(new Wall(410, 320, 60, 300));
+        add(new Wall(810, 100, 60, 300));
+        add(new Wall(210, 800, 600, 60));
     }
 
     public Tank getMainTank() {

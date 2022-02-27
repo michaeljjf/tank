@@ -17,7 +17,6 @@ public class Bullet extends GameObject {
     private static final int WIDTH = ResourceMgr.getInstance().bulletUp.getWidth();
     private static final int HEIGHT = ResourceMgr.getInstance().bulletUp.getHeight();
     private Dir dir;
-    private GameModel gameModel = null;
     private Group group;
     private boolean living = true;
     private final Rectangle rectangle = new Rectangle();
@@ -33,13 +32,12 @@ public class Bullet extends GameObject {
     private Bullet() {
     }
 
-    public Bullet(int x, int y, Dir dir, Group group, GameModel gameModel) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         // 让子弹的坐标，在坦克中间
         this.x = x - WIDTH / 2;
         this.y = y - HEIGHT / 2;
         this.dir = dir;
         this.group = group;
-        this.gameModel = gameModel;
         rectangle.x = this.x;
         rectangle.y = this.y;
         rectangle.width = WIDTH;
@@ -49,7 +47,7 @@ public class Bullet extends GameObject {
     @Override
     public void paint(Graphics g) {
         if (!this.living) {
-            this.gameModel.remove(this);
+            GameModel.getInstance().remove(this);
             return;
         }
         switch (dir) {

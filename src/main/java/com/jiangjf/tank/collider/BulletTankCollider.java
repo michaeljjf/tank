@@ -19,7 +19,7 @@ public class BulletTankCollider implements Collider {
                 return true;
             }
             if (bullet.getRectangle().intersects(tank.getRectangle()) && tank.getLiving()) {
-                GameModel.getInstance().add(new Explode(tank.getX() + Tank.TANK_WIDTH / 2, tank.getY() + Tank.TANK_HEIGHT / 2, GameModel.getInstance()));
+                GameModel.getInstance().add(new Explode(tank.getX() + Tank.TANK_WIDTH / 2, tank.getY() + Tank.TANK_HEIGHT / 2));
                 bullet.die();
                 tank.die();
                 return false;
