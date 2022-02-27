@@ -1,7 +1,5 @@
 package com.jiangjf.tank;
 
-import com.jiangjf.tank.collider.BulletTankCollider;
-import com.jiangjf.tank.collider.Collider;
 import com.jiangjf.tank.collider.ColliderChain;
 import com.jiangjf.tank.enums.Dir;
 import com.jiangjf.tank.enums.Group;
@@ -17,9 +15,29 @@ import java.util.List;
  * @date 2022/2/24
  */
 public class GameModel {
-    private final Tank myTank = new Tank(210, 400, Dir.UP, Group.GOOD, this);
+    private static final GameModel INSTANCE = new GameModel();
+    private final Tank myTank = new Tank(230, 400, Dir.UP, Group.GOOD, this);
     List<GameObject> objects = new ArrayList<>();
     ColliderChain chain = new ColliderChain();
+
+    public static GameModel getInstance() {
+        return INSTANCE;
+    }
+
+    private GameModel() {
+        // 初始化敌方坦克
+        for (int i = 0; i < 5; i++) {
+            Tank tank = new Tank(50 + i * 120, 70, Dir.DOWN, Group.BAD, this);
+            tank.setMoving(true);
+            this.add(tank);
+        }
+
+        // 初始化墙
+        this.add(new Wall(110, 100, 60, 300));
+        this.add(new Wall(410, 320, 60, 300));
+        this.add(new Wall(810, 100, 60, 300));
+        this.add(new Wall(210, 800, 600, 60));
+    }
 
     public Tank getMainTank() {
         return this.myTank;
